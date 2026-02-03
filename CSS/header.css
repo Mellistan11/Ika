@@ -1,8 +1,10 @@
 :root {
     --header-height: 55px;
     --main-header-bar-height: min(calc(var(--header-height) * 0.7), 40px);
-    --logo-width: 70px;
-    --search-width: min(calc(var(--header-height)*2.2), 140px)
+    --logo-width: calc(var(--main-header-bar-height) * (800/536));
+    --logo-text-height: min(calc(var(--main-header-bar-height) * 0.5), 16px);
+    --logo-text-width: calc(var(--logo-text-height) * (2199 / 133));
+    --searchbar-width: min(calc(var(--header-height)*2.2), 140px)
 }
 
 
@@ -27,11 +29,11 @@
 .main-header-logo  {
     height: var(--main-header-bar-height);
     aspect-ratio: 800/536;
-    width: auto;
+    width: var(--logo-width);
     place-self: center;
 }
 
-#search-bar {
+#searchbar {
     display: block;
     height: 85%;
     background-color: #e20612;
@@ -54,11 +56,30 @@
     width: 100vw;
 }
 
-@media (min-width: 820px) {                             /* Width-Size > 820px */
+@media (min-width: 800px) {                             /* Width-Size > 800px */
 
-    #main-header-bar {
-        grid-template-columns: var(--logo-width) calc(100% - var(--logo-width) - var(--search-width) - calc(var(--main-header-bar-height) * 0.4 * 2)) var(--search-width);
-        gap: calc(var(--main-header-bar-height) * 0.4);
+    @media (min-Width: 1050px) {                        /* Width-Size > 1050px */
+        #main-header-bar {
+            grid-template-columns:   var(--logo-width)   calc(100% - var(--logo-width) - var(--logo-text-width) - var(--searchbar-width) - calc(var(--main-header-bar-height) * 0.4 * 3))   var(--logo-text-width)   var(--searchbar-width);
+            gap: calc(var(--main-header-bar-height) * 0.4);
+        }
+
+        .main-header-logo-text {
+            display: block;
+            height: var(--logo-text-height);
+            width: var(--logo-text-width);
+        }
+    }
+
+    @media (max-Width: 1050px) {                        /* Width-Size < 1050px */
+        #main-header-bar {
+            grid-template-columns:   var(--logo-width)   calc(100% - var(--logo-width) - var(--searchbar-width) - calc(var(--main-header-bar-height) * 0.4 * 2))   var(--searchbar-width);
+            gap: calc(var(--main-header-bar-height) * 0.4);
+        }
+
+        .main-header-logo-text {
+        display: none;
+        }
     }
 
     #header-nav-container {
@@ -70,7 +91,18 @@
         padding-left: calc(var(--main-header-bar-height) * 0.5);
     }
 
-    .header-nav-element {
+    #header-nav-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: var(--main-header-bar-height);
+        width: calc(var(--main-header-bar-height) * 0.05);
+        background-color: black;
+        border-radius: 10000px;
+    }
+
+    #header-nav-container > a {
         display: inline-flex;
         text-align: center;
         align-items: center;
@@ -87,14 +119,22 @@
 }
 
 
-@media (min-width: 350px ) and (max-width: 820px) {    /* 350px < Width-Size < 820px */
+@media (min-width: 350px ) and (max-width: 800px) {    /* 350px < Width-Size < 800px */
 
     #main-header-bar {
-        grid-template-columns: var(--logo-width) calc(100% - var(--logo-width) - var(--search-width) - var(--main-header-bar-height) - 60px)  var(--search-width) var(--main-header-bar-height);
+        grid-template-columns:   var(--logo-width)   calc(100% - var(--logo-width) - var(--searchbar-width) - var(--main-header-bar-height) - 60px)   var(--searchbar-width)   var(--main-header-bar-height);
         gap: 20px;
     }
 
-    #header-nav-container .header-nav-element {
+    #header-nav-container{
+        visibility: 0;
+    }
+
+    #header-nav-container > a {
+        display: none;
+    }
+
+    .main-header-logo-text {
         display: none;
     }
 
@@ -114,13 +154,23 @@
 
     #main-header-bar {
         grid-template-columns: var(--logo-width) calc(100% - var(--logo-width   ) - var(--main-header-bar-height)) var(--main-header-bar-height);
+        gap: 0;
     }
 
-    .header-nav-element {
+    #header-nav-container{
+        visibility: 0;
+    }
+
+    #header-nav-container > a {
         display: none;
     }
 
-    #search-bar {
+    .main-header-logo-text {
+        display: none;
+        opacity: 0;
+    }
+
+    #searchbar {
         display: none;
     }
 
