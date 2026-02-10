@@ -1,46 +1,64 @@
+// Returns true if windowWidth <= 780px
+
+  function isPhone() {
+    return window.innerWidth <= 780;
+  }
+
+
+
 // Menu open / close
 
-    const menuButton = document.getElementById("menu-button");
-    let menuOpen = false;
+  const menuButton = document.getElementById("menu-button");
+  const dropdownMenu = document.getElementById("dropdown-menu");
+  let menuOpen = false;
 
-    // Opens and adds to history
-    function openMenu(push = true) {
+  function openMenu() {
     menuButton.classList.add("menu-button-open");
+    dropdownMenu.classList.remove("dropdown-menu-hidden");
+    dropdownMenu.classList.add("dropdown-menu-shown");
+
     menuOpen = true;
+  }
 
-    if (push) {
-        history.pushState({ menuOpen: true }, "", "");
-    }
-    }
-
-    // Closes
-    function closeMenu() {
+  function closeMenu() {
     menuButton.classList.remove("menu-button-open");
+    dropdownMenu.classList.remove("dropdown-menu-shown");
+    dropdownMenu.classList.add("dropdown-menu-hidden");
+
     menuOpen = false;
-    }
+  }
+  
 
-    // If close -> Open else Open -> Close
-    menuButton.addEventListener("click", () => {
+  menuButton.addEventListener("click", () => {
     if (!menuOpen) {
-        openMenu();
+      openMenu();
     } else {
-        history.back();
+      closeMenu();
     }
-    });
+  });
 
-    // Controlls browser back or forward
-    window.addEventListener("popstate", (event) => {
-    if (event.state && event.state.menuOpen) {
-        openMenu(false); // Opens but doesnt change history
-    } else {
-        closeMenu();
+
+// Menu open / close when rezise
+  let wasPhone = isPhone();
+  let reopen = false;
+
+  window.addEventListener("resize", () => {
+    const nowPhone = isPhone();
+
+    if (wasPhone && !nowPhone) {
+      reopen = menuOpen;
+      if (menuOpen) closeMenu();
     }
-    });
+
+    if (!wasPhone && nowPhone) {
+      if (reopen) openMenu(false);
+    }
+
+    wasPhone = nowPhone;
+  });
 
 
-
-
-// Header shows and hides                           //
+// Header shows and hides
 
     const mainHeader = document.getElementById("main-header");
     const gradient = document.getElementById("header-gradient");
@@ -79,34 +97,4 @@
     });
 
 
-
-
-// const mainHeader = document.getElementById("main-header");
-// const gradient = document.getElementById("header-gradient");
-
-// let lastScrollTop = 0;
-// const mainHeaderHeight = mainHeader.offsetHeight;
-
-// window.addEventListener("scroll", function() {
-//     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-//     const scrollingDown = scrollTop > lastScrollTop;
-
-//     if (scrollingDown) { // If scrolling down -> Hides      
-//             mainHeader.style.transition = "none"
-//         const translateY = Math.min(scrollTop, mainHeaderHeight);   
-//         mainHeader.style.transform = `translateY(-${translateY}px)`  
-
-//         gradient.classList.remove("gradient-shown");  
-//         gradient.classList.add("gradient-hidden");
-//     } else { 
-//         // If not scrolling down -> Shows       
-//         mainHeader.style.transition = "transform 0.3s ease"
-//         mainHeader.style.transform = "translateY(0)";
-
-//         gradient.classList.remove("gradient-hidden");    
-//         gradient.classList.add("gradient-shown");    
-//     }
-
-//     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop   
-// })
 

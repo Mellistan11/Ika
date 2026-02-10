@@ -1,11 +1,11 @@
 :root {
     --header-height: 55px;
+    --header-background-color: rgb(255, 255, 255);
     --main-header-bar-height: min(calc(var(--header-height) * 0.7), 40px);
     --logo-width: calc(var(--main-header-bar-height) * (800/536));
-    --logo-text-height: min(calc(var(--main-header-bar-height) * 0.5), 16px);
-    --logo-text-width: calc(var(--logo-text-height) * (2199 / 133));
-    --searchbar-width: min(calc(var(--header-height)*2.2), 140px);
+    --searchbar-height: calc(var(--main-header-bar-height) * 0.85);
     --menu-button-length: calc(var(--main-header-bar-height) * 0.7);
+    --dropdown-menu-width: clamp(20px, 30vw, 200px);
 }
 
 
@@ -13,24 +13,24 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 40px);
     height: var(--header-height);
     align-content: center;
     padding: 0 20px;
-    background-color: white;
+    background-color: var(--header-background-color);
     transform: translateY(0);
     will-change: transform;
 }
 
-#main-header::after {
+#main-header::after {     /* Header Gradient */
     content: "";
     position: absolute;
     inset: 0;
+    width: 100%;
     height: calc(var(--main-header-bar-height) * 0.4);
     top: var(--header-height);
   
-    background: linear-gradient(
-      to bottom,
+    background: linear-gradient( to bottom,
       rgba(0, 0, 0, 0.159) 0%,
       rgba(0, 0, 0, 0) 95%
     );
@@ -42,6 +42,8 @@
     justify-content: center;
     width: 100%;
     height: var(--main-header-bar-height);
+
+    container-type: inline-size;
 }
 
 .main-header-logo  {
@@ -59,12 +61,54 @@ button {
     cursor: pointer;
 }
 
-#searchbar {
-    display: block;
-    height: 85%;
-    background-color: #e20612;
-    border-radius: 1000px;
-}
+
+
+/* Searchbar */
+
+    #searchbar {
+        display: grid;
+        box-sizing: border-box;
+        height: 100%;
+        width: clamp( calc(var(--header-height) * 2.5), 100%, 300px);
+        background-color: #e20612;
+        border-radius: 1000px;
+        grid-template-columns: var(--searchbar-height) 1fr;
+        justify-self: right;
+        justify-items: center;
+        align-items: center;
+    }
+
+    #searchbar-icon-button {
+        height: calc(var(--searchbar-height) * 0.6);
+        width: calc(var(--searchbar-height) * 0.6);
+        align-items: center;
+    }
+
+    .search-icon {
+        position: relative;
+        height: 90%;
+        width: 90%;
+        padding: 5%;
+    }
+
+    #searchbar-input {
+        position: relative;
+        width: calc(100% - (var(--searchbar-height) * 0.4) - (var(--searchbar-height) * 0.2));
+        margin-left: calc(var(--searchbar-height) * 0.2);
+        margin-right: calc(var(--searchbar-height) * 0.4);
+        height: var(--searchbar-height);
+        padding: 0;
+        background-color: transparent;
+        color: white;
+        border: none;
+        outline: none;
+    }
+
+    #searchbar-input::placeholder {
+        color: white;
+        opacity: 1;
+    }
+
 
 
 /* Menu button */
@@ -72,6 +116,7 @@ button {
     #menu-button {
         display: none;
         align-items: center;
+        justify-self: center;
         height: var(--menu-button-length);
         width: var(--menu-button-length);
         cursor: pointer;
@@ -108,6 +153,7 @@ button {
         transform: translateY(calc(var(--menu-button-length) / 2.5));
     }
 
+
     /* Menu Button Aniamation */
     .menu-button-open > .menu-button-hamburger {
         transform: translateX(calc(var(--main-header-bar-height) * 0.9));
@@ -126,41 +172,44 @@ button {
 
 
 
-@media (min-width: 780px) {                             /* Width-Size > 780px */
+/* Dropdown Menu */
 
-    @media (min-Width: 1050px) {                        /* Width-Size > 1050px */
-        #main-header-bar {
-            grid-template-columns:   var(--logo-width)   calc(100% - var(--logo-width) - var(--logo-text-width) - var(--searchbar-width) - calc(var(--main-header-bar-height) * 0.4 * 3))   var(--logo-text-width)   var(--searchbar-width);
-            gap: calc(var(--main-header-bar-height) * 0.4);
-            width: calc(100vw - 50px);
-        }
-
-        .main-header-logo-text {
-            display: block;
-            height: var(--logo-text-height);
-            width: var(--logo-text-width);
-        }
+    #dropdown-menu{
+        position: fixed;
+        top: var(--header-height);
+        right: 0;
+        width: var(--dropdown-menu-width);
+        height: 300px;
+        background-color: var(--header-background-color);
+        transition: transform 0.5s ease-in-out;
+        will-change: transform;
     }
 
-    @media (max-Width: 1049.98px) {                        /* Width-Size < 1050px */
-        #main-header-bar {
-            grid-template-columns:   var(--logo-width)   calc(100% - var(--logo-width) - var(--searchbar-width) - calc(var(--main-header-bar-height) * 0.4 * 2))   var(--searchbar-width);
-            gap: calc(var(--main-header-bar-height) * 0.4);
-            width: calc(100vw - 50px);
-        }
-
-        .main-header-logo-text {
-        display: none;
-        }
+    .dropdown-menu-shown {
+        transform: translateX(0);
+    }
+    .dropdown-menu-hidden {
+        transform: translateX(100%);
     }
 
+
+
+
+
+
+@media (min-width: 835px) {                             /* Width-Size > 835px */
+               
+    #main-header-bar {
+        grid-template-columns:   var(--logo-width)   auto   1fr;
+        gap: calc(var(--main-header-bar-height) * 0.8);
+    }
+  
     #header-nav-container {
         display: grid;
         grid-auto-flow: column;
         grid-auto-columns: max-content;
         gap: calc(var(--main-header-bar-height) * 0.4);
         height: 60%;
-        padding-left: calc(var(--main-header-bar-height) * 0.5);
     }
 
     #header-nav-container > button {
@@ -184,12 +233,11 @@ button {
 
 
 
-@media (min-width: 320px ) and (max-width: 779.98px) {    /* 320px < Width-Size < 780px */
+@media (min-width: 360px ) and (max-width: 834.98px) {    /* 360px < Width-Size < 780px */
 
     #main-header-bar {
-        grid-template-columns:   var(--logo-width)   calc(100% - var(--logo-width) - var(--searchbar-width) - var(--main-header-bar-height) - 60px)   var(--searchbar-width)   var(--main-header-bar-height);
-        gap: 20px;
-        width: calc(100vw - 40px);
+        grid-template-columns:   var(--logo-width)  0  1fr   var(--main-header-bar-height);
+        gap: calc(var(--main-header-bar-height) * 0.4);
     }
 
     #main-header-bar > :nth-child(5n) {
@@ -197,11 +245,10 @@ button {
     }
 
     #header-nav-container{
-        visibility: 0;
+        visibility: hidden;
     }
 
-    #header-nav-container > button,
-    .main-header-logo-text {
+    #header-nav-container > button {
         display: none;
     }
 
@@ -213,16 +260,11 @@ button {
 
 
 
-@media (max-width: 319.98px ) {                            /* Width-Size < 320px */
+@media (max-width: 359.98px ) {                            /* Width-Size < 360px */
 
     #main-header-bar {
-        grid-template-columns: var(--logo-width) calc(100% - var(--logo-width   ) - var(--main-header-bar-height)) var(--main-header-bar-height);
+        grid-template-columns: var(--logo-width) 1fr var(--main-header-bar-height);
         gap: 0;
-        width: calc(100vw - 40px);
-    }
-
-    #main-header-bar > :nth-child(5n) {
-        justify-self: center;
     }
 
     #header-nav-container{
@@ -230,7 +272,6 @@ button {
     }
 
     #header-nav-container > button,
-    .main-header-logo-text,
     #searchbar {
         display: none;
         
