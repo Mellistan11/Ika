@@ -1,11 +1,10 @@
 :root {
-    --header-height: 55px;
-    --header-background-color: rgb(255, 255, 255);
-    --main-header-bar-height: min(calc(var(--header-height) * 0.7), 40px);
-    --logo-width: calc(var(--main-header-bar-height) * (800/536));
-    --searchbar-height: calc(var(--main-header-bar-height) * 0.85);
-    --menu-button-length: calc(var(--main-header-bar-height) * 0.7);
-    --dropdown-menu-width: clamp(20px, 30vw, 200px);
+    --header-height: 55px;      /* Sets the height of header */
+    --main-header-bar-height: min(calc(var(--header-height) * 0.7), 40px);      /* Sets the height of the elements in the header. <= 1 */
+    --logo-width: calc(var(--main-header-bar-height) * (800/536));      /* The width of the logo, can't be edited */
+    --searchbar-height: calc(var(--main-header-bar-height) * 0.85);     /* Sets the height of the searchbar. <= 1 */
+    --menu-button-length: calc(var(--main-header-bar-height) * 0.7);        /* Sets the width and height of the hamburger menu. <= 1 */
+    --dropdown-menu-width: clamp(20px, 30vw, 200px);        /* Sets the width of the dropdown menu */
 }
 
 
@@ -17,9 +16,9 @@
     height: var(--header-height);
     align-content: center;
     padding: 0 20px;
-    background-color: var(--header-background-color);
-    transform: translateY(0);
+    background-color: white;
     will-change: transform;
+
 }
 
 #main-header::after {     /* Header Gradient */
@@ -49,14 +48,37 @@
     aspect-ratio: 800/536;
     width: var(--logo-width);
     place-self: center;
+    transition: 0.3s;
+}
+
+.main-header-logo:hover {
+    transform: scale(1.05);
+}
+
+.main-header-logo:active {
+    transform: scale(1);
 }
 
 button {
-    background-color: transparent;
     padding: 0;
     border: 0;
     margin: 0;
+    background-color: transparent;
     cursor: pointer;
+    transition: 0.3s;
+    will-change: transform;
+    text-decoration: none;
+    color: black;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: normal;
+}
+
+#header-nav-container button:hover {
+    transform: scale(1.1);
+}
+
+#header-nav-container button:active {
+    transform: scale(1);
 }
 
 
@@ -77,11 +99,11 @@ button {
     }
 
     .searchbar-expanded {
-        width: clamp( calc(var(--header-height) * 2.5), 100%, 300px);
+        width: clamp( calc(var(--header-height) * 1), 100%, 450px);
     }
     
     .searchbar-retracted {
-        width: calc(var(--header-height) * 1.5);
+        width: calc(var(--header-height) * 1.75);
     }
 
     #searchbar-icon-button {
@@ -95,6 +117,15 @@ button {
         height: 90%;
         width: 90%;
         padding: 5%;
+        transition:  0.2s;
+    }
+
+    .search-icon:hover {
+        transform: scale(1.2);
+    }
+
+    .search-icon:active {
+        transform: scale(1.1);
     }
 
     #searchbar-input {
@@ -127,9 +158,16 @@ button {
         width: var(--menu-button-length);
         cursor: pointer;
         transition: 0.3s ease-in-out;
+        will-change: transform;
+        transform: scale(1);
+    }
+
+    #menu-button:hover {
+        transform: scale(1.1);
     }
 
     .menu-button-hamburger {
+        position: relative;
         justify-self: center;
         width: var(--menu-button-length);
         height: calc(var(--menu-button-length) * 0.16);
@@ -153,27 +191,55 @@ button {
 
     .menu-button-hamburger::before {
         transform: translateY(calc(var(--menu-button-length) / -2.5));
+        transition: 0.3s ease-in-out;
     }
 
     .menu-button-hamburger::after {
         transform: translateY(calc(var(--menu-button-length) / 2.5));
+        transition: 0.3s ease-in-out;
     }
 
 
     /* Menu Button Aniamation */
     .menu-button-open > .menu-button-hamburger {
-        transform: translateX(calc(var(--main-header-bar-height) * 0.9));
+        transform: translateX(calc(var(--main-header-bar-height) * -0.9));
         cursor: default;
         background: transparent;
         box-shadow: none;
     }
 
     .menu-button-open > .menu-button-hamburger::before {
-        transform: translateX(calc(var(--main-header-bar-height) * -0.9)) rotate(45deg);
+        transform: translateX(calc(var(--main-header-bar-height) * 0.9)) rotate(45deg);
     }
 
     .menu-button-open > .menu-button-hamburger::after {
-        transform: translateX(calc(var(--main-header-bar-height) * -0.9)) rotate(-45deg);
+        transform: translateX(calc(var(--main-header-bar-height) * 0.9)) rotate(-45deg);
+    }
+
+
+
+/* Basket */
+
+    #basket-container {
+        position: relative;
+        align-items: center;
+        justify-self: center;
+        display: grid;
+        height: var(--main-header-bar-height);
+        width: 100%;
+        background-color: #e20612;
+        border-radius: 10000px;
+        grid-template-columns: calc(var(--main-header-bar-height) * 0.7) 1fr ;
+    }
+
+    #basket {
+        height: calc(var(--main-header-bar-height) * 0.7);
+        width: calc(var(--main-header-bar-height) * 0.7); 
+    }
+
+    .basket-image {
+        height: 100%;
+        width: 100%;
     }
 
 
@@ -186,7 +252,7 @@ button {
         right: 0;
         width: var(--dropdown-menu-width);
         height: 300px;
-        background-color: var(--header-background-color);
+        background-color: white;
         transition: transform 0.5s ease-in-out;
         will-change: transform;
     }
@@ -206,7 +272,7 @@ button {
 @media (min-width: 835px) {                             /* Width-Size > 835px */
                
     #main-header-bar {
-        grid-template-columns:   var(--logo-width)   auto   1fr;
+        grid-template-columns:   var(--logo-width)   auto   1fr  calc(var(--main-header-bar-height)* 2);
         gap: calc(var(--main-header-bar-height) * 0.8);
     }
   
@@ -218,21 +284,17 @@ button {
         height: 60%;
     }
 
-    #header-nav-container > button {
+    #header-nav-container > a {
         display: inline-flex;
         text-align: center;
         align-items: center;
-        text-decoration: none;
-        color: black;
-        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        font-weight: 450;
         font-size: min(calc(var(--main-header-bar-height) * 0.5), 15px);
     }
 
     #menu-button,
     .menu-button-hamburger,
     .menu-button-hamburger::before,
-    .menu-button-hamburger::after  {
+    .menu-button-hamburger::after {
         display: none;
     }
 }
@@ -242,24 +304,33 @@ button {
 @media (min-width: 360px ) and (max-width: 834.98px) {    /* 360px < Width-Size < 780px */
 
     #main-header-bar {
-        grid-template-columns:   var(--logo-width)  0  1fr   var(--main-header-bar-height);
+        grid-template-columns: var(--main-header-bar-height)  var(--logo-width)  1fr   calc(var(--main-header-bar-height)* 2);
         gap: calc(var(--main-header-bar-height) * 0.4);
+        grid-template-areas: "menu logo searchbar basket";
     }
 
-    #main-header-bar > :nth-child(5n) {
-        justify-self: center;
-    }
-
-    #header-nav-container{
-        visibility: hidden;
-    }
-
-    #header-nav-container > button {
+    #header-nav-container {
         display: none;
     }
 
     #menu-button {
         display: grid;
+        grid-area: menu;
+    }
+
+    #main-header-logo {
+        display: grid;
+        grid-area: logo;
+    }
+
+    #searchbar {
+        display: grid;
+        grid-area: searchbar;
+    }
+
+    #basket-container {
+        display: grid;
+        grid-area: basket;
     }
 }
 
@@ -269,21 +340,31 @@ button {
 @media (max-width: 359.98px ) {                            /* Width-Size < 360px */
 
     #main-header-bar {
-        grid-template-columns: var(--logo-width) 1fr var(--main-header-bar-height);
-        gap: 0;
+        grid-template-columns: var(--main-header-bar-height) var(--logo-width) 1fr calc(var(--main-header-bar-height)* 2);
+        grid-template-areas: "menu logo . basket";
+        gap: calc(var(--main-header-bar-height) * 0.4);
     }
 
-    #header-nav-container{
-        visibility: 0;
-    }
-
-    #header-nav-container > button,
-    #searchbar {
+    #header-nav-container {
         display: none;
-        
     }
 
     #menu-button {
         display: grid;
+        grid-area: menu;
+    }
+
+    #main-header-logo {
+        display: grid;
+        grid-area: logo;
+    }
+
+    #searchbar {
+        display: none;
+    }
+
+    #basket-container {
+        display: grid;
+        grid-area: basket;
     }
 }
