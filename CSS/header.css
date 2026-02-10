@@ -42,8 +42,6 @@
     justify-content: center;
     width: 100%;
     height: var(--main-header-bar-height);
-
-    container-type: inline-size;
 }
 
 .main-header-logo  {
@@ -69,13 +67,21 @@ button {
         display: grid;
         box-sizing: border-box;
         height: 100%;
-        width: clamp( calc(var(--header-height) * 2.5), 100%, 300px);
         background-color: #e20612;
         border-radius: 1000px;
         grid-template-columns: var(--searchbar-height) 1fr;
         justify-self: right;
         justify-items: center;
         align-items: center;
+        transition: width 0.5s;
+    }
+
+    .searchbar-expanded {
+        width: clamp( calc(var(--header-height) * 2.5), 100%, 300px);
+    }
+    
+    .searchbar-retracted {
+        width: calc(var(--header-height) * 1.5);
     }
 
     #searchbar-icon-button {
