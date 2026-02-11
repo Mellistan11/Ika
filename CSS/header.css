@@ -329,6 +329,7 @@ button {
         background-color: white;
         will-change: transform;
         overflow: auto;
+        text-align: center;
     }
 
     #dropdown-gradient {
@@ -368,7 +369,6 @@ button {
         width: 150px;
         height: auto;
         margin-top: calc(var(--searchbar2-height) * 0.4);
-        padding: 0 calc((100% - 150px) / 2);
     }
 
 
