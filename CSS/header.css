@@ -313,12 +313,11 @@ button {
 
 /* Dropdown Menu */
 
-    #dropdown-menu{
+    #dropdown-menu {
         position: fixed;
         top: var(--header-height);
         right: 0;
-        width: var(--dropdown-menu-width);
-        height: 300px;
+        height: calc(100vh - var(--header-height));
         background-color: white;
         transition: transform 0.5s ease-in-out;
         will-change: transform;
@@ -407,6 +406,18 @@ button {
     #basket-container {
         display: grid;
     }
+
+    @media (min-width: 499.98px) {
+        #dropdown-menu {
+            width: clamp(200px, 40vw, 40vw);
+        }
+    }
+    
+    @media (max-width: 500px) {
+        #dropdown-menu {
+            width: 100vw;
+        }
+    }
 }
 
 
@@ -447,5 +458,9 @@ button {
     #basket-container {
         display: grid;
         justify-self: right;
+    }
+
+    #dropdown-menu {
+        width: 100vw;
     }
 }
