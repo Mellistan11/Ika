@@ -152,7 +152,7 @@ button {
 /* Menu button */
 
     #menu-button {
-        display: none;
+        display: grid;
         align-items: center;
         justify-self: center;
         height: var(--menu-button-length);
@@ -311,6 +311,7 @@ button {
     }
 
 
+
 /* Dropdown Menu */
 
     #dropdown-menu {
@@ -319,17 +320,41 @@ button {
         right: 0;
         height: calc(100vh - var(--header-height));
         background-color: white;
-        transition: transform 0.5s ease-in-out;
+        transition: transform 0.7s ease-in-out;
         will-change: transform;
     }
 
-    .dropdown-menu-shown {
+    #dropdown-menu.dropdown-menu-shown {
         transform: translateX(0);
     }
-    .dropdown-menu-hidden {
+    #dropdown-menu.dropdown-menu-hidden {
         transform: translateX(100%);
     }
 
+
+
+/* Dropdown Shadow */
+
+    #dropdown-shadow {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        height: calc(100vh - var(--header-height));
+        transition: transform 0.7s ease-in-out;
+        will-change: transform;
+
+        background: linear-gradient( to left,
+        rgba(0, 0, 0, 0.288) 0%,
+        rgba(0, 0, 0, 0.067) 100%
+        );
+    }
+
+    #dropdown-shadow.dropdown-menu-shown {
+        transform: translateX(0);
+    }
+    #dropdown-shadow.dropdown-menu-hidden {
+        transform: translateX(-100%);
+    }
 
 
 
@@ -338,8 +363,8 @@ button {
 @media (min-width: 835px) {                             /* Width-Size > 835px */
                
     #main-header-bar {
-        grid-template-columns:   var(--logo-width)   auto   1fr;
-        gap: calc(var(--main-header-bar-height) * 0.8);
+        grid-template-columns: var(--main-header-bar-height)  var(--logo-width)   auto   1fr;
+        gap: calc(var(--main-header-bar-height) * 0.4);
     }
   
     #header-nav-container {
@@ -361,11 +386,12 @@ button {
         grid-template-columns: 1fr auto;
     }
 
-    #menu-button,
-    .menu-button-hamburger,
-    .menu-button-hamburger::before,
-    .menu-button-hamburger::after {
-        display: none;
+    #dropdown-menu {
+        width: 40vw;
+    }
+
+    #dropdown-shadow {
+        width: 60vw;
     }
 }
 
@@ -384,7 +410,6 @@ button {
     }
 
     #menu-button {
-        display: grid;
         grid-area: menu;
     }
 
@@ -409,13 +434,21 @@ button {
 
     @media (min-width: 499.98px) {
         #dropdown-menu {
-            width: clamp(200px, 40vw, 40vw);
+            width: 40vw;
+        }
+
+        #dropdown-shadow {
+            width: 60vw;
         }
     }
     
     @media (max-width: 500px) {
         #dropdown-menu {
             width: 100vw;
+        }
+
+        #dropdown-shadow {
+            display: none
         }
     }
 }
@@ -436,7 +469,6 @@ button {
     }
 
     #menu-button {
-        display: grid;
         grid-area: menu;
     }
 
@@ -462,5 +494,9 @@ button {
 
     #dropdown-menu {
         width: 100vw;
+    }
+
+    #dropdown-shadow {
+        display: none
     }
 }
