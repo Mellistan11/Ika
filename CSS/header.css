@@ -375,7 +375,7 @@ button {
 
     /* Dropdown Container */
     #dropdown-container h1 {
-        font-family: 'Courier New', Courier, monospace;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         justify-self: right;
         margin: 20px 0;
     }
