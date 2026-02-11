@@ -1,3 +1,22 @@
+// makes main content unscrollable when mouse isnt hovering over it
+
+  let scrollPosition = 0;
+
+  function lockScroll() {
+    scrollPosition = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollPosition}px`;
+    document.body.style.width = "100%";
+  }
+
+  function unlockScroll() {
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    window.scrollTo(0, scrollPosition);
+  }
+
+
 // Returns true if windowWidth <= 780px
 
   function isPhone() {
@@ -12,7 +31,7 @@
   const dropdownShadowButton = document.getElementById("dropdown-shadow");
   const dropdownMenu = document.getElementById("dropdown-menu");
   const dropdownGradient = document.getElementById("dropdown-gradient");
-  const dropdownShadow = document.getElementById("dropdown-shadow")
+  const dropdownShadow = document.getElementById("dropdown-shadow");
   let menuOpen = false;
 
   function openMenu() {
@@ -25,6 +44,7 @@
     dropdownShadow.classList.toggle("dropdown-menu-hidden");
     dropdownShadow.classList.toggle("dropdown-menu-shown");
 
+    lockScroll();
     menuOpen = true;
   }
 
@@ -38,6 +58,7 @@
     dropdownShadow.classList.toggle("dropdown-menu-shown");
     dropdownShadow.classList.toggle("dropdown-menu-hidden");
 
+    unlockScroll();
     menuOpen = false;
   }
   
@@ -51,9 +72,7 @@
   });
 
   dropdownShadowButton.addEventListener("click", () => {
-    if (!menuOpen) {
-      openMenu();
-    } else {
+    if (menuOpen) {
       closeMenu();
     }
   });
