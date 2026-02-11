@@ -341,7 +341,6 @@ button {
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.25s ease-in-out;
-     z-index: 9999;
 
     background: linear-gradient(to top,
         rgba(0, 0, 0, 0.26) 0%,
@@ -565,6 +564,12 @@ button {
     
     @media (max-width: 500px) {
         #dropdown-menu {
+            width: 100vw;
+        }
+
+        #dropdown-gradient {
+            left: 0;
+            right: 0;
             width: 100vw;
         }
     }
