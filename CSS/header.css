@@ -247,9 +247,9 @@ button {
         grid-template-columns: 1fr ;
     }
 
-
     #basket { 
-        justify-self: center;
+        justify-self: left;
+        transform: translateX(25%);
     }
 
     .basket-open  #basket {
@@ -282,7 +282,7 @@ button {
     .basket-icon {
         height: 100%;
         width: 100%;
-        transition: 0.3s ease-in-out;
+        transition: 0.3s ease-in-out;        
     }
 
     .basket-icon:hover {
@@ -324,20 +324,82 @@ button {
         top: var(--header-height);
         right: 0;
         height: calc(100vh - var(--header-height));
-        padding-left: 30px;
-        padding-right: 30px;
-        padding-top: calc(var(--dropdown-menu-height) * 0.6);
+        padding: 0 30px;
+        padding-top: 25px;
         background-color: white;
-        transition: transform 0.5s ease-in-out;
         will-change: transform;
         overflow: auto;
     }
 
+    #dropdown-gradient {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 60px;
+    width: var(--dropdown-menu-width);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+     z-index: 9999;
+
+    background: linear-gradient(to top,
+        rgba(0, 0, 0, 0.26) 0%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    }
+
+    #dropdown-gradient.dropdown-gradient-open {
+    opacity: 1;
+    }
+
     #dropdown-menu.dropdown-menu-shown {
+        transition: transform 0.5s ease-in-out;
         transform: translateX(0);
     }
     #dropdown-menu.dropdown-menu-hidden {
+        transition: transform 0.25s ease-in-out;
         transform: translateX(100%);
+    }
+
+
+
+    /* Logo */
+    .dropdown-logo {
+        width: 150px;
+        height: auto;
+        margin-top: calc(var(--searchbar2-height) * 0.4);
+        padding: 0 calc((100% - 150px) / 2);
+    }
+
+
+
+    /* Dropdown Container */
+    #dropdown-container h1 {
+        font-family: 'Courier New', Courier, monospace;
+        justify-self: right;
+        margin: 20px 0;
+    }
+
+
+    /* Dropdown Nav Container */
+    #dropdown-nav-container {
+        display: grid;
+        grid-template-rows: repeat(8, 1fr);
+        gap: 20px;
+        justify-items: right;
+    }
+
+    #dropdown-nav-container > button {
+        display: inline-flex;
+        font-size: 17px;        
+    }
+
+    #dropdown-nav-container > button:hover {
+        transform: scale(1.05);
+    }
+
+    #dropdown-nav-container > button:active {
+        transform: scale(1);
     }
 
 
@@ -399,24 +461,28 @@ button {
 /* Dropdown Shadow */
 
     #dropdown-shadow {
+        display: block;
         position: fixed;
         top: var(--header-height);
         left: 0;
         height: calc(100vh - var(--header-height));
-        transition: transform 0.5s ease-in-out;
-        will-change: transform;
+        width: 100vw;
+        opacity: 0;
 
-        background: linear-gradient( to left,
-        rgba(0, 0, 0, 0.288) 0%,
+        background: linear-gradient( to right,
+        rgba(0, 0, 0, 0.067) 0%,
+        rgba(0, 0, 0, 0.432) calc(100vw - var(--dropdown-menu-width)),
         rgba(0, 0, 0, 0.067) 100%
         );
     }
 
     #dropdown-shadow.dropdown-menu-shown {
-        transform: translateX(0);
+        transition: opacity 0.5s ease-in-out;
+        opacity: 1;
     }
     #dropdown-shadow.dropdown-menu-hidden {
-        transform: translateX(-100%);
+        transition: opacity 0.25s ease-in-out;
+        opacity: 0;
     }
 
 
@@ -451,10 +517,6 @@ button {
 
     #dropdown-menu {
         width: var(--dropdown-menu-width);
-    }
-
-    #dropdown-shadow {
-        width: calc(100vw - var(--dropdown-menu-width));
     }
 }
 
@@ -499,19 +561,11 @@ button {
         #dropdown-menu {
             width: var(--dropdown-menu-width);
         }
-
-        #dropdown-shadow {
-            width: calc(100vw - var(--dropdown-menu-width));
-        }
     }
     
     @media (max-width: 500px) {
         #dropdown-menu {
             width: 100vw;
-        }
-
-        #dropdown-shadow {
-            display: none
         }
     }
 }
@@ -560,7 +614,9 @@ button {
         right: 0;
     }
 
-    #dropdown-shadow {
-        display: none
+    #dropdown-gradient {
+        left: 0;
+        right: 0;
+        width: 100vw;
     }
 }

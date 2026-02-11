@@ -9,7 +9,9 @@
 // Menu open / close
 
   const menuButton = document.getElementById("menu-button");
+  const dropdownShadowButton = document.getElementById("dropdown-shadow");
   const dropdownMenu = document.getElementById("dropdown-menu");
+  const dropdownGradient = document.getElementById("dropdown-gradient");
   const dropdownShadow = document.getElementById("dropdown-shadow")
   let menuOpen = false;
 
@@ -17,6 +19,9 @@
     menuButton.classList.add("menu-button-open");
     dropdownMenu.classList.toggle("dropdown-menu-hidden");
     dropdownMenu.classList.toggle("dropdown-menu-shown");
+
+    dropdownGradient.classList.toggle("dropdown-gradient-open");
+
     dropdownShadow.classList.toggle("dropdown-menu-hidden");
     dropdownShadow.classList.toggle("dropdown-menu-shown");
 
@@ -27,6 +32,9 @@
     menuButton.classList.remove("menu-button-open");
     dropdownMenu.classList.toggle("dropdown-menu-shown");
     dropdownMenu.classList.toggle("dropdown-menu-hidden");
+
+    dropdownGradient.classList.toggle("dropdown-gradient-open");
+
     dropdownShadow.classList.toggle("dropdown-menu-shown");
     dropdownShadow.classList.toggle("dropdown-menu-hidden");
 
@@ -35,6 +43,14 @@
   
 
   menuButton.addEventListener("click", () => {
+    if (!menuOpen) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  dropdownShadowButton.addEventListener("click", () => {
     if (!menuOpen) {
       openMenu();
     } else {
