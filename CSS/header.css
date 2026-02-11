@@ -337,7 +337,6 @@ button {
     bottom: 0;
     right: 0;
     height: 60px;
-    width: var(--dropdown-menu-width);
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.25s ease-in-out;
@@ -517,6 +516,10 @@ button {
     #dropdown-menu {
         width: var(--dropdown-menu-width);
     }
+
+    #dropdown-gradient {
+        width: var(--dropdown-menu-width);
+    }
 }
 
 
@@ -558,6 +561,10 @@ button {
 
     @media (min-width: 499.98px) {
         #dropdown-menu {
+            width: var(--dropdown-menu-width);
+        }
+
+        #dropdown-gradient {
             width: var(--dropdown-menu-width);
         }
     }
