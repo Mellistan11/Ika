@@ -62,17 +62,30 @@
 
 // Searchbar expand when focused
   const searchbar = document.getElementById("searchbar");
-  const seachbarInput = document.getElementById("searchbar-input")
+  const seachbarInput = document.getElementById("searchbar-input");
 
   seachbarInput.addEventListener("focus", () => {
     searchbar.classList.remove("searchbar-retracted");
-    searchbar.classList.add("searchbar-expanded")
+    searchbar.classList.add("searchbar-expanded");
   })
 
   seachbarInput.addEventListener("blur", () => {
     searchbar.classList.remove("searchbar-expanded");
-    searchbar.classList.add("searchbar-retracted")
+    searchbar.classList.add("searchbar-retracted"); 
   })
+
+
+// Basket open / close
+  const container = document.getElementById("container"); 
+  const basket = document.getElementById("basket");
+
+  basket.addEventListener("click", () => {
+    container.classList.toggle("basket-open");
+    container.classList.toggle("basket-closed");
+  })
+
+
+
 
 
 

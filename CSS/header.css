@@ -8,6 +8,7 @@
 }
 
 
+
 #main-header {  
     position: fixed;
     top: 0;
@@ -125,7 +126,7 @@ button {
     }
 
     .search-icon:active {
-        transform: scale(1.1);
+        transform: scale(1);
     }
 
     #searchbar-input {
@@ -226,22 +227,81 @@ button {
         justify-self: center;
         display: grid;
         height: var(--main-header-bar-height);
-        width: 100%;
+        width: var(--basket-width);
         background-color: #e20612;
         border-radius: 10000px;
         grid-template-columns: calc(var(--main-header-bar-height) * 0.7) 1fr ;
+        transition: 0.3s ease-in-out;
     }
 
-    #basket {
-        height: calc(var(--main-header-bar-height) * 0.7);
-        width: calc(var(--main-header-bar-height) * 0.7); 
+    .basket-open  #basket-container {
+        grid-template-columns: calc(var(--main-header-bar-height) * 0.7) 1fr ;
     }
 
-    .basket-image {
+    .basket-closed  #basket-container {
+        grid-template-columns: 1fr ;
+    }
+
+    #basket { 
+        justify-self: center;
+    }
+
+    .basket-open  #basket {
+        height: calc(var(--main-header-bar-height) * 0.5);
+        width: calc(var(--main-header-bar-height) * 0.5); 
+    }
+
+    .basket-closed  #basket {
+        height: calc(var(--main-header-bar-height) * 0.65);
+        width: calc(var(--main-header-bar-height) * 0.65); 
+    }
+
+    #basket-value {
+        justify-self: left;
+    }
+
+    .basket-open  #basket-value {
+        display: inline-block;
+    }
+
+    .basket-closed  #basket-value {
+        display: none;
+    }
+
+    .basket-icon {
         height: 100%;
         width: 100%;
+        transition: 0.3s;
     }
 
+    .basket-icon:hover {
+        transform: scale(1.2);
+    }
+
+    .basket-icon:active {
+        transform: scale(1);
+    }
+
+
+
+/* Container */
+
+    #container {
+        --basket-width: calc(var(--main-header-bar-height) * 1);
+        display: grid;
+        position: relative;
+        align-items: right;
+        width: 100%;
+        gap: calc(var(--main-header-bar-height) * 0.3);;
+    }
+
+    #container.basket-open {
+        --basket-width: calc(var(--main-header-bar-height) * 2);
+    }
+
+    #container.basket-closed {
+        --basket-width: calc(var(--main-header-bar-height) * 1);
+    }
 
 
 /* Dropdown Menu */
@@ -272,7 +332,7 @@ button {
 @media (min-width: 835px) {                             /* Width-Size > 835px */
                
     #main-header-bar {
-        grid-template-columns:   var(--logo-width)   auto   1fr  calc(var(--main-header-bar-height)* 2);
+        grid-template-columns:   var(--logo-width)   auto   1fr;
         gap: calc(var(--main-header-bar-height) * 0.8);
     }
   
@@ -291,6 +351,10 @@ button {
         font-size: min(calc(var(--main-header-bar-height) * 0.5), 15px);
     }
 
+    #container {
+        grid-template-columns: 1fr auto;
+    }
+
     #menu-button,
     .menu-button-hamburger,
     .menu-button-hamburger::before,
@@ -304,9 +368,9 @@ button {
 @media (min-width: 360px ) and (max-width: 834.98px) {    /* 360px < Width-Size < 780px */
 
     #main-header-bar {
-        grid-template-columns: var(--main-header-bar-height)  var(--logo-width)  1fr   calc(var(--main-header-bar-height)* 2);
+        grid-template-columns: var(--main-header-bar-height)  var(--logo-width)  1fr;
         gap: calc(var(--main-header-bar-height) * 0.4);
-        grid-template-areas: "menu logo searchbar basket";
+        grid-template-areas: "menu logo container";
     }
 
     #header-nav-container {
@@ -323,14 +387,18 @@ button {
         grid-area: logo;
     }
 
+    #container {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-area: container;
+    }
+
     #searchbar {
         display: grid;
-        grid-area: searchbar;
     }
 
     #basket-container {
         display: grid;
-        grid-area: basket;
     }
 }
 
@@ -340,8 +408,8 @@ button {
 @media (max-width: 359.98px ) {                            /* Width-Size < 360px */
 
     #main-header-bar {
-        grid-template-columns: var(--main-header-bar-height) var(--logo-width) 1fr calc(var(--main-header-bar-height)* 2);
-        grid-template-areas: "menu logo . basket";
+        grid-template-columns: var(--main-header-bar-height) var(--logo-width) 1fr;
+        grid-template-areas: "menu logo container";
         gap: calc(var(--main-header-bar-height) * 0.4);
     }
 
@@ -359,12 +427,17 @@ button {
         grid-area: logo;
     }
 
+    #container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-area: container;
+    }
+
     #searchbar {
         display: none;
     }
 
     #basket-container {
         display: grid;
-        grid-area: basket;
     }
 }
