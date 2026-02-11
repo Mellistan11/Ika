@@ -2,9 +2,12 @@
     --header-height: 55px;      /* Sets the height of header */
     --main-header-bar-height: min(calc(var(--header-height) * 0.7), 40px);      /* Sets the height of the elements in the header. <= 1 */
     --logo-width: calc(var(--main-header-bar-height) * (800/536));      /* The width of the logo, can't be edited */
-    --searchbar-height: calc(var(--main-header-bar-height) * 0.85);     /* Sets the height of the searchbar. <= 1 */
+    --searchbar-height: calc(var(--main-header-bar-height) * 0.85);     /* Sets the height of searchbar. <= 1 */
     --menu-button-length: calc(var(--main-header-bar-height) * 0.7);        /* Sets the width and height of the hamburger menu. <= 1 */
-    --dropdown-menu-width: clamp(20px, 30vw, 200px);        /* Sets the width of the dropdown menu */
+    --dropdown-menu-width: 40vw;        /* Sets the width of the dropdown menu. */
+    --dropdown-element-width: calc(var(--dropdown-menu-width) * 0.8);       /* Sets the width of the elements in dropdown menu. <= 1 */
+    --dropdown-menu-height: 55px;       /* Sets the height of each element in dropdown menu. <= 1 */
+    --searchbar2-height: calc(var(--dropdown-menu-height) * 0.7)        /* Sets the height of searchbar2. <= 1 */
 }
 
 
@@ -13,10 +16,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: calc(100% - 40px);
+    right: 0;
     height: var(--header-height);
     align-content: center;
     padding: 0 20px;
+    box-sizing: border-box;
     background-color: white;
     will-change: transform;
 
@@ -254,8 +258,8 @@ button {
     }
 
     .basket-closed  #basket {
-        height: calc(var(--main-header-bar-height) * 0.65);
-        width: calc(var(--main-header-bar-height) * 0.65); 
+        height: calc(var(--main-header-bar-height) * 0.6);
+        width: calc(var(--main-header-bar-height) * 0.6); 
     }
 
 
@@ -303,7 +307,7 @@ button {
     }
 
     #container.basket-open {
-        --basket-width: calc(var(--main-header-bar-height) * 2);
+        --basket-width: calc(var(--main-header-bar-height) * 2.5);
     }
 
     #container.basket-closed {
@@ -316,12 +320,17 @@ button {
 
     #dropdown-menu {
         position: fixed;
+        box-sizing: border-box;
         top: var(--header-height);
         right: 0;
         height: calc(100vh - var(--header-height));
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: calc(var(--dropdown-menu-height) * 0.6);
         background-color: white;
-        transition: transform 0.7s ease-in-out;
+        transition: transform 0.5s ease-in-out;
         will-change: transform;
+        overflow: auto;
     }
 
     #dropdown-menu.dropdown-menu-shown {
@@ -333,6 +342,60 @@ button {
 
 
 
+    /* Searchbar */
+    #searchbar2 {
+        display: grid;
+        box-sizing: border-box;
+        height: var(--searchbar2-height);
+        background-color: #e20612;
+        border-radius: 1000px;
+        grid-template-columns: var(--searchbar2-height) 1fr;
+        justify-items: center;
+        align-items: center;
+    }
+
+    #searchbar-icon-button2 {
+        height: calc(var(--searchbar2-height) * 0.6);
+        width: calc(var(--searchbar2-height) * 0.6);
+        align-items: center;
+    }
+
+    .search-icon2 {
+        position: relative;
+        height: 90%;
+        width: 90%;
+        padding: 5%;
+        transition:  0.3s ease-in-out;
+    }
+
+    .search-icon2:hover {
+        transform: scale(1.2);
+    }
+
+    .search-icon2:active {
+        transform: scale(1);
+    }
+
+    #searchbar-input2 {
+        position: relative;
+        width: calc(100% - (var(--searchbar2-height) * 0.4) - (var(--searchbar2-height) * 0.2));
+        margin-left: calc(var(--searchbar2-height) * 0.2);
+        margin-right: calc(var(--searchbar2-height) * 0.4);
+        height: var(--searchbar2-height);
+        padding: 0;
+        background-color: transparent;
+        color: white;
+        border: none;
+        outline: none;
+    }
+
+    #searchbar-input2::placeholder {
+        color: white;
+        opacity: 1;
+    }
+
+
+
 /* Dropdown Shadow */
 
     #dropdown-shadow {
@@ -340,7 +403,7 @@ button {
         top: var(--header-height);
         left: 0;
         height: calc(100vh - var(--header-height));
-        transition: transform 0.7s ease-in-out;
+        transition: transform 0.5s ease-in-out;
         will-change: transform;
 
         background: linear-gradient( to left,
@@ -360,7 +423,7 @@ button {
 
 
 
-@media (min-width: 835px) {                             /* Width-Size > 835px */
+@media (min-width: 865px) {                             /* Width-Size > 865px */
                
     #main-header-bar {
         grid-template-columns: var(--main-header-bar-height)  var(--logo-width)   auto   1fr;
@@ -387,17 +450,17 @@ button {
     }
 
     #dropdown-menu {
-        width: 40vw;
+        width: var(--dropdown-menu-width);
     }
 
     #dropdown-shadow {
-        width: 60vw;
+        width: calc(100vw - var(--dropdown-menu-width));
     }
 }
 
 
 
-@media (min-width: 360px ) and (max-width: 834.98px) {    /* 360px < Width-Size < 780px */
+@media (min-width: 385px ) and (max-width: 864.98px) {    /* 385px < Width-Size < 865px */
 
     #main-header-bar {
         grid-template-columns: var(--main-header-bar-height)  var(--logo-width)  1fr;
@@ -434,11 +497,11 @@ button {
 
     @media (min-width: 499.98px) {
         #dropdown-menu {
-            width: 40vw;
+            width: var(--dropdown-menu-width);
         }
 
         #dropdown-shadow {
-            width: 60vw;
+            width: calc(100vw - var(--dropdown-menu-width));
         }
     }
     
@@ -456,7 +519,7 @@ button {
 
 
 
-@media (max-width: 359.98px ) {                            /* Width-Size < 360px */
+@media (max-width: 384.98px ) {                            /* Width-Size < 385px */
 
     #main-header-bar {
         grid-template-columns: var(--main-header-bar-height) var(--logo-width) 1fr;
@@ -493,7 +556,8 @@ button {
     }
 
     #dropdown-menu {
-        width: 100vw;
+        left: 0;
+        right: 0;
     }
 
     #dropdown-shadow {
