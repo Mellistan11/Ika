@@ -177,4 +177,3 @@
     bodyMode.classList.toggle("left");
     bodyMode.classList.toggle("right");
   });
-  
