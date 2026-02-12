@@ -441,8 +441,8 @@ button {
     }
 
     #buttons-menu img {
-        width: 100%;
-        height: 100%;
+        width: 25.2px;
+        height: 25.2px;
         justify-self: center;
         align-self: center;
         transition: 0.3s;
