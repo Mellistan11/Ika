@@ -175,3 +175,24 @@
     bodyMode.classList.toggle("left");
     bodyMode.classList.toggle("right");
   });
+
+
+
+// saves mode localy
+  const saved = localStorage.getItem("mode");
+  if (saved) {
+    setMode(saved, document.getElementById(saved));
+  } else {
+    const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
+    setMode(prefersDark ? "darkmode" : "defaultmode", prefersDark ? darkmode : defaultmode);
+  }
+
+  function setMode(mode, button) {
+    bodyMode.classList.remove("defaultmode", "lightmode", "darkmode");
+    bodyMode.classList.add(mode);
+
+    modeButtons.forEach(btn => btn.classList.remove("selected"));
+    button.classList.add("selected");
+
+    localStorage.setItem("mode", mode);
+  }

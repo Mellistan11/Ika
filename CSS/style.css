@@ -395,7 +395,7 @@ button {
         color: var(--text-color-2);
     }
 
-    body.left #dropdown-menu.dropdown-menu-hidden {
+    #body.left #dropdown-menu.dropdown-menu-hidden {
         transition: transform 0.25s ease-in-out;
         transform: translateX(-100%);
     }
@@ -404,7 +404,7 @@ button {
         transition: transform 0.5s ease-in-out;
         transform: translateX(0);
     }
-    body.right #dropdown-menu.dropdown-menu-hidden {
+    #body.right #dropdown-menu.dropdown-menu-hidden {
         transition: transform 0.25s ease-in-out;
         transform: translateX(100%);
     }
