@@ -7,7 +7,8 @@
     --dropdown-menu-width: 40vw;        /* Sets the width of the dropdown menu. */
     --dropdown-element-width: calc(var(--dropdown-menu-width) * 0.8);       /* Sets the width of the elements in dropdown menu. <= 1 */
     --dropdown-menu-height: 55px;       /* Sets the height of each element in dropdown menu. <= 1 */
-    --searchbar2-height: calc(var(--dropdown-menu-height) * 0.7)        /* Sets the height of searchbar2. <= 1 */
+    --searchbar2-height: calc(var(--dropdown-menu-height) * 0.7);        /* Sets the height of searchbar2. <= 1 */
+    --dropdown-logo-width: calc(var(--dropdown-menu-height) * 3);         /* Sets the width of dropdown logo */
 }
 
 
@@ -56,14 +57,6 @@
     transition: 0.3s ease-in-out;
 }
 
-.main-header-logo:hover {
-    transform: scale(1.05);
-}
-
-.main-header-logo:active {
-    transform: scale(1);
-}
-
 button {
     padding: 0;
     border: 0;
@@ -76,14 +69,6 @@ button {
     color: black;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: normal;
-}
-
-#header-nav-container button:hover {
-    transform: scale(1.1);
-}
-
-#header-nav-container button:active {
-    transform: scale(1);
 }
 
 
@@ -125,14 +110,6 @@ button {
         transition:  0.3s ease-in-out;
     }
 
-    .search-icon:hover {
-        transform: scale(1.2);
-    }
-
-    .search-icon:active {
-        transform: scale(1);
-    }
-
     #searchbar-input {
         position: relative;
         width: calc(100% - (var(--searchbar-height) * 0.4) - (var(--searchbar-height) * 0.2));
@@ -165,10 +142,6 @@ button {
         transition: 0.3s ease-in-out;
         will-change: transform;
         transform: scale(1);
-    }
-
-    #menu-button:hover {
-        transform: scale(1.1);
     }
 
     .menu-button-hamburger {
@@ -262,7 +235,6 @@ button {
         width: calc(var(--main-header-bar-height) * 0.6); 
     }
 
-
     #basket-value {
         justify-self: left;
         font-family: Arial, Helvetica, sans-serif;
@@ -278,19 +250,10 @@ button {
         display: none;
     }
 
-
     .basket-icon {
         height: 100%;
         width: 100%;
         transition: 0.3s ease-in-out;        
-    }
-
-    .basket-icon:hover {
-        transform: scale(1.2);
-    }
-
-    .basket-icon:active {
-        transform: scale(1);
     }
 
 
@@ -319,6 +282,9 @@ button {
 /* Dropdown Menu */
 
     #dropdown-menu {
+        display: grid;
+        grid-template-rows: auto auto auto 300px 1fr auto;
+        grid-template-areas: "searchbar2" "dropdownLogo" "kategorier" "navContainer" "gap" "buttons";
         position: fixed;
         box-sizing: border-box;
         top: var(--header-height);
@@ -326,10 +292,20 @@ button {
         height: calc(100vh - var(--header-height));
         padding: 0 30px;
         padding-top: 25px;
+        padding-bottom: 20px;
         background-color: white;
         will-change: transform;
         overflow: auto;
         text-align: center;
+    }
+
+    #dropdown-menu h1 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 28px;
+        height: 40px;
+        justify-self: right;
+        margin: 15px 0;
+        grid-area: kategorier;
     }
 
     #dropdown-gradient {
@@ -364,40 +340,26 @@ button {
 
     /* Logo */
     .dropdown-logo {
-        width: 150px;
+        width: var(--dropdown-logo-width);
         height: auto;
-        margin-top: calc(var(--searchbar2-height) * 0.4);
+        grid-area: dropdownLogo;
     }
 
-
-
-    /* Dropdown Container */
-    #dropdown-container h1 {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        justify-self: right;
-        margin: 20px 0;
-    }
 
 
     /* Dropdown Nav Container */
     #dropdown-nav-container {
         display: grid;
-        grid-template-rows: repeat(8, 1fr);
         gap: 20px;
-        justify-items: right;
+        justify-items: end;
+        grid-area: navContainer;
     }
 
     #dropdown-nav-container > button {
         display: inline-flex;
-        font-size: 17px;        
-    }
-
-    #dropdown-nav-container > button:hover {
-        transform: scale(1.05);
-    }
-
-    #dropdown-nav-container > button:active {
-        transform: scale(1);
+        font-size: 17px;
+        height: fit-content;    
+        width: fit-content;
     }
 
 
@@ -412,6 +374,7 @@ button {
         grid-template-columns: var(--searchbar2-height) 1fr;
         justify-items: center;
         align-items: center;
+        grid-area: searchbar2;
     }
 
     #searchbar-icon-button2 {
@@ -427,15 +390,6 @@ button {
         padding: 5%;
         transition:  0.3s ease-in-out;
     }
-
-    .search-icon2:hover {
-        transform: scale(1.2);
-    }
-
-    .search-icon2:active {
-        transform: scale(1);
-    }
-
     #searchbar-input2 {
         position: relative;
         width: calc(100% - (var(--searchbar2-height) * 0.4) - (var(--searchbar2-height) * 0.2));
@@ -452,6 +406,46 @@ button {
     #searchbar-input2::placeholder {
         color: white;
         opacity: 1;
+    }
+
+
+
+    /* Buttons */
+    #buttons-menu {
+        display: grid;
+        position: relative;
+        grid-template-rows: 40px;
+        gap: 20px;
+        grid-area: buttons;
+        padding-top: 30px;
+    }
+
+    #buttons-menu div {
+        display: grid;
+        position: relative;
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 100%;
+        justify-items: center;
+    }
+
+    #buttons-menu button {
+        width: 30px;
+        height: 30px;
+    }
+
+    #defaultmode,
+    #lightmode,
+    #darkmode {
+        border: 3px gray solid;
+        border-radius: 9px;
+    }
+
+    #buttons-menu img {
+        width: 100%;
+        height: 100%;
+        justify-self: center;
+        align-self: center;
+        transition: 0.3s;
     }
 
 
@@ -631,4 +625,35 @@ button {
         right: 0;
         width: 100vw;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (hover: hover) and (pointer: fine) {
+    #header-nav-container button:hover { transform: scale(1.1); }
+    #menu-button:hover { transform: scale(1.1); }
+    .search-icon:hover { transform: scale(1.2); }
+    .search-icon2:hover { transform: scale(1.2); }
+    .basket-icon:hover { transform: scale(1.2); }
+    #dropdown-nav-container > button:hover { transform: scale(1.05); }
+    #buttons-menu img:hover { transform: scale(0.85); }
+  }
+
+
+#header-nav-container button:active,
+#dropdown-nav-container > button:active,
+#menu-button:active,
+.search-icon:active,
+.search-icon2:active,
+.basket-icon:active,
+#buttons-menu img:active {
+  transform: scale(1);
 }
