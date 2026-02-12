@@ -295,7 +295,7 @@ button {
         padding-bottom: 30px;
         background-color: white;
         will-change: transform;
-        overflow-y: auto
+        overflow-y: auto;
         text-align: center;
 
         
