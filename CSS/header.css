@@ -283,7 +283,7 @@ button {
 
     #dropdown-menu {
         display: grid;
-        grid-template-rows: auto auto auto 300px 1fr auto;
+        grid-template-rows: auto auto auto 300px auto auto;
         grid-template-areas: "searchbar2" "dropdownLogo" "kategorier" "navContainer" "gap" "buttons";
         position: fixed;
         box-sizing: border-box;
@@ -295,11 +295,13 @@ button {
         padding-bottom: 30px;
         background-color: white;
         will-change: transform;
+        overflow-y: auto
         text-align: center;
 
-        overflow-y: auto;
+        
         -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
         overscroll-behavior: contain;
+        touch-action: pan-y;  */
     }
 
     #dropdown-menu h1 {
