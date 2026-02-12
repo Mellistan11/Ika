@@ -395,6 +395,11 @@ button {
         color: var(--text-color-2);
     }
 
+    body.left #dropdown-menu.dropdown-menu-hidden {
+        transition: transform 0.25s ease-in-out;
+        transform: translateX(-100%);
+    }
+
     #dropdown-menu.dropdown-menu-shown {
         transition: transform 0.5s ease-in-out;
         transform: translateX(0);
@@ -402,11 +407,6 @@ button {
     body.right #dropdown-menu.dropdown-menu-hidden {
         transition: transform 0.25s ease-in-out;
         transform: translateX(100%);
-    }
-
-    body.left #dropdown-menu.dropdown-menu-hidden {
-        transition: transform 0.25s ease-in-out;
-        transform: translateX(-100%);
     }
 
 
