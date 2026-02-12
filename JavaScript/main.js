@@ -1,20 +1,18 @@
 // makes main content unscrollable when mouse isnt hovering over it
 
-  let scrollPosition = 0;
+let scrollPosition = 0;
 
-  function lockScroll() {
-    scrollPosition = window.scrollY;
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollPosition}px`;
-    document.body.style.width = "100%";
-  }
+function lockScroll() {
+  scrollPosition = window.scrollY;
+  document.body.classList.add("no-scroll");
+  document.body.style.top = `-${scrollPosition}px`;
+}
 
-  function unlockScroll() {
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.width = "";
-    window.scrollTo(0, scrollPosition);
-  }
+function unlockScroll() {
+  document.body.classList.remove("no-scroll");
+  document.body.style.top = "";
+  window.scrollTo(0, scrollPosition);
+}
 
 
 // Returns true if windowWidth <= 780px

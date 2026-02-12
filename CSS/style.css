@@ -8,6 +8,11 @@ body {
     overflow-y: scroll;
 }
 
+body.no-scroll {
+    overflow: hidden;
+    touch-action: none;
+}
+
 main {
     display: grid;
     margin-top: var(--header-height);

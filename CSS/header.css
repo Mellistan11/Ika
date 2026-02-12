@@ -289,14 +289,17 @@ button {
         box-sizing: border-box;
         top: var(--header-height);
         right: 0;
-        height: calc(100vh - var(--header-height));
+        height: calc(100dvh - var(--header-height));
         padding: 0 30px;
         padding-top: 25px;
         padding-bottom: 20px;
         background-color: white;
         will-change: transform;
-        overflow: auto;
         text-align: center;
+
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
+        overscroll-behavior: contain;
     }
 
     #dropdown-menu h1 {
