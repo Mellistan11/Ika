@@ -140,22 +140,31 @@
   const defaultmode = document.getElementById("defaultmode"); 
   const lightmode = document.getElementById("lightmode"); 
   const darkmode = document.getElementById("darkmode");
-
-  function setMode(mode) {
+  const buttons = [defaultmode, lightmode, darkmode];
+  function setMode(mode, button) {
     bodyMode.classList.remove("defaultmode");
     bodyMode.classList.remove("lightmode");
     bodyMode.classList.remove("darkmode");
 
     bodyMode.classList.add(mode);
-    currentMode = mode;
+
+    buttons.forEach(btn => btn.classList.remove("selected"));
+    button.classList.add("selected");
   }
+      // ai - detects if user have darkmode on system
 
-  let currentMode = "defaultmode";
-  setMode(currentMode);
+      // Detect system preference
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  defaultmode.addEventListener("click", () => setMode("defaultmode"));
-  lightmode.addEventListener("click", () => setMode("lightmode"));
-  darkmode.addEventListener("click", () => setMode("darkmode"));
+      // Default mode on first load
+      setMode(prefersDark ? "darkmode" : "defaultmode", prefersDark ? darkmode : defaultmode);
+
+
+  defaultmode.addEventListener("click", () => setMode("defaultmode", defaultmode));
+  lightmode.addEventListener("click", () => setMode("lightmode", lightmode));
+  darkmode.addEventListener("click", () => setMode("darkmode", darkmode));
+
+  setMode("defaultmode", defaultmode);
 
 
 

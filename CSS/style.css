@@ -399,9 +399,14 @@ button {
         transition: transform 0.5s ease-in-out;
         transform: translateX(0);
     }
-    #dropdown-menu.dropdown-menu-hidden {
+    body.right #dropdown-menu.dropdown-menu-hidden {
         transition: transform 0.25s ease-in-out;
         transform: translateX(100%);
+    }
+
+    body.left #dropdown-menu.dropdown-menu-hidden {
+        transition: transform 0.25s ease-in-out;
+        transform: translateX(-100%);
     }
 
 
@@ -501,6 +506,16 @@ button {
         justify-items: center;
     }
 
+    #buttons-menu .selected {
+        width: calc(var(--dropdown-element-width) * 0.11);
+        height: calc(var(--dropdown-element-width) * 0.11);
+    }
+
+    #buttons-menu .selected img{
+        width: calc(var(--dropdown-element-width) * 0.09);
+        height: calc(var(--dropdown-element-width) * 0.09);
+    }
+
     #buttons-menu button {
         width: calc(var(--dropdown-element-width) * 0.1);
         height: calc(var(--dropdown-element-width) * 0.1);
@@ -525,8 +540,8 @@ button {
     #buttons-menu img {
         display: block;
         box-sizing: border-box;
-        width: calc(var(--dropdown-element-width) * 0.087);
-        height: calc(var(--dropdown-element-width) * 0.087);
+        width: calc(var(--dropdown-element-width) * 0.088);
+        height: calc(var(--dropdown-element-width) * 0.088);
         justify-self: center;
         align-self: center;
         transition: transform 0.3s;
