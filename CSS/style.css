@@ -1,12 +1,6 @@
 @import url("header.css");
 
 
-body {
-    background-color: rgb(255, 247, 235);
-    margin: 0;
-    padding: 0;
-}
-
 body.no-scroll {
     overflow: hidden;
     touch-action: none;

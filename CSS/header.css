@@ -6,9 +6,36 @@
     --menu-button-length: calc(var(--main-header-bar-height) * 0.7);        /* Sets the width and height of the hamburger menu. <= 1 */
     --dropdown-menu-width: 500px;        /* Sets the width of the dropdown menu. */
     --dropdown-element-width: calc(var(--dropdown-menu-width) * 0.8);       /* Sets the width of the elements in dropdown menu. <= 1 */
-    --dropdown-menu-height: 55px;       /* Sets the height of each element in dropdown menu. <= 1 */
-    --searchbar2-height: calc(var(--dropdown-menu-height) * 0.7);        /* Sets the height of searchbar2. <= 1 */
-    --dropdown-logo-width: calc(var(--dropdown-menu-height) * 3);         /* Sets the width of dropdown logo */
+    --searchbar2-height: calc(var(--header-height) * 0.7);        /* Sets the height of searchbar2. <= 1 */
+    --dropdown-logo-width: calc(var(--header-height) * 3);         /* Sets the width of dropdown logo */
+}
+
+
+body {
+    background-color: var(--background-color-2);
+    margin: 0;
+    padding: 0;
+}
+
+body.defaultmode {
+    --background-color-1: #ffffff;
+    --background-color-2: #fff7eb;
+    --background-color-3: #e20612;
+    --brightness-images: 1; 
+}
+
+body.lightmode {
+    --background-color-1: #f7f7f7;
+    --background-color-2: #d6d6d6;
+    --background-color-3: #727272;
+    --brightness-images: 1; 
+}
+
+body.darkmode {
+    --background-color-1: #0e1117;
+    --background-color-2: #25272c;
+    --background-color-3: #000000;
+    --brightness-images: 10; 
 }
 
 
@@ -22,7 +49,7 @@
     align-content: center;
     padding: 0 20px;
     box-sizing: border-box;
-    background-color: white;
+    background-color: var(--background-color-1);
     will-change: transform;
 
 }
@@ -55,6 +82,7 @@
     width: var(--logo-width);
     place-self: center;
     transition: 0.3s ease-in-out;
+    filter: brightness(--brightness-images)
 }
 
 button {
@@ -79,7 +107,7 @@ button {
         display: grid;
         box-sizing: border-box;
         height: 100%;
-        background-color: #e20612;
+        background-color: var(--background-color-3);
         border-radius: 1000px;
         grid-template-columns: var(--searchbar-height) 1fr;
         justify-self: right;
@@ -293,7 +321,7 @@ button {
         padding: 0 30px;
         padding-top: 25px;
         padding-bottom: 30px;
-        background-color: white;
+        background-color: var(--background-color-1);
         will-change: transform;
         overflow-y: auto;
         text-align: center;
@@ -375,7 +403,7 @@ button {
         display: grid;
         box-sizing: border-box;
         height: var(--searchbar2-height);
-        background-color: #e20612;
+        background-color: var(--background-color-3);
         border-radius: 1000px;
         grid-template-columns: var(--searchbar2-height) 1fr;
         justify-items: center;
@@ -437,8 +465,8 @@ button {
     }
 
     #buttons-menu button {
-        width: 40px;
-        height: 40px;
+        width: calc(var(--dropdown-element-width) * 0.1);
+        height: calc(var(--dropdown-element-width) * 0.1);
         justify-items: center;
         align-items: center;
     }
@@ -447,14 +475,15 @@ button {
     #lightmode,
     #darkmode,
     #move-dropdown {
-        border: 3px gray solid;
+        border: calc(var(--dropdown-element-width) * 0.007) gray solid;
         border-radius: 9px;
     }
 
     #buttons-menu img {
         display: block;
-        width: 35px;
-        height: 35px;
+        box-sizing: border-box;
+        width: calc(var(--dropdown-element-width) * 0.087);
+        height: calc(var(--dropdown-element-width) * 0.087);
         justify-self: center;
         align-self: center;
         transition: 0.3s;
@@ -650,16 +679,35 @@ button {
 
 
 @media (hover: hover) and (pointer: fine) {
-    #header-nav-container button:hover { transform: scale(1.1); }
-    #menu-button:hover { transform: scale(1.1); }
-    .search-icon:hover { transform: scale(1.2); }
-    .search-icon2:hover { transform: scale(1.2); }
-    .basket-icon:hover { transform: scale(1.2); }
-    #dropdown-nav-container > button:hover { transform: scale(1.05); }
-    #buttons-menu img:hover { transform: scale(0.85); }
+    .main-header-logo:hover {
+        transform: scale(1.05); 
+    }
+    #header-nav-container button:hover {
+    transform: scale(1.1); 
+    }
+    #menu-button:hover {
+        transform: scale(1.1); 
+    }
+    .search-icon:hover {
+        transform: scale(1.2); 
+    }
+    .search-icon2:hover {
+        transform: scale(1.2); 
+    }
+    .basket-icon:hover {
+        transform: scale(1.2); 
+    }
+    #dropdown-nav-container > button:hover {
+        transform: scale(1.05); 
+    }
+    #buttons-menu img:hover {
+        transform: scale(0.85); 
+    }
   }
 
 
+
+.main-header-logo:active,
 #header-nav-container button:active,
 #dropdown-nav-container > button:active,
 #menu-button:active,
@@ -667,5 +715,6 @@ button {
 .search-icon2:active,
 .basket-icon:active,
 #buttons-menu img:active {
+    transition: 0.1s ease-out;
   transform: scale(1);
 }

@@ -15,7 +15,7 @@
   }
 
 
-  
+
 // Returns true if windowWidth <= 780px
 
   function isPhone() {
@@ -101,3 +101,57 @@
     container.classList.toggle("basket-open");
     container.classList.toggle("basket-closed");
   })
+
+
+// Zoom in / Zoom out
+  const root = document.documentElement;
+  const zoomIn = document.getElementById("zoom-in");
+  const zoomOut = document.getElementById("zoom-out");
+
+  function changeSize(variableName, amount, min, max) {
+  
+    const currentValue = getComputedStyle(root)
+      .getPropertyValue(variableName)
+      .trim();
+
+    let data = parseFloat(currentValue);
+
+    data += amount;
+
+    data = Math.max(min, Math.min(max, data));
+
+    root.style.setProperty(variableName, data + "px");
+  }
+
+  zoomIn.addEventListener("click", () => {
+    changeSize("--header-height", 10, 35, 95);
+    changeSize("--dropdown-menu-width", 20, 460, 580);
+  })
+
+  zoomOut.addEventListener("click", () => {
+    changeSize("--header-height", -10, 35, 95);
+    changeSize("--dropdown-menu-width", -20, 460, 580);
+  })
+
+
+
+// Deafault / light / dark-mode
+  const bodyMode = document.body;
+  const defaultmode = document.getElementById("defaultmode"); 
+  const lightmode = document.getElementById("lightmode"); 
+  const darkmode = document.getElementById("darkmode");
+
+  function setMode(mode) {
+    bodyMode.classList.remove("defaultmode");
+    bodyMode.classList.remove("lightmode");
+      bodyMode.classList.remove("darkmode");
+    bodyMode.classList.add(mode);
+    currentMode = mode;
+  }
+
+  let currentMode = "defaultmode";
+  setMode(currentMode);
+
+  defaultmode.addEventListener("click", () => setMode("defaultmode"));
+  lightmode.addEventListener("click", () => setMode("lightmode"));
+  darkmode.addEventListener("click", () => setMode("darkmode"));
