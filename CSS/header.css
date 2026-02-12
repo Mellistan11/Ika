@@ -343,6 +343,7 @@ button {
         width: var(--dropdown-logo-width);
         height: auto;
         grid-area: dropdownLogo;
+        justify-self: center;
     }
 
 
