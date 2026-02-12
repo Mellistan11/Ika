@@ -436,7 +436,8 @@ button {
 
     #defaultmode,
     #lightmode,
-    #darkmode {
+    #darkmode,
+    #move-dropdown {
         border: 3px gray solid;
         border-radius: 9px;
     }
