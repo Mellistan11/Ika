@@ -137,34 +137,36 @@
 
 // Deafault / light / dark-mode
   const bodyMode = document.body;
+
   const defaultmode = document.getElementById("defaultmode"); 
   const lightmode = document.getElementById("lightmode"); 
   const darkmode = document.getElementById("darkmode");
   const buttons = [defaultmode, lightmode, darkmode];
-  function setMode(mode, button) {
+
+  function setMode(mode) {
     bodyMode.classList.remove("defaultmode");
     bodyMode.classList.remove("lightmode");
     bodyMode.classList.remove("darkmode");
-
     bodyMode.classList.add(mode);
 
     buttons.forEach(btn => btn.classList.remove("selected"));
-    button.classList.add("selected");
+    const activeButton = document.getElementById(mode);
+    if (activeButton) activeButton.classList.add("selected");
+
+    localStorage.setItem("mode", mode);
   }
-      // ai - detects if user have darkmode on system
 
-      // Detect system preference
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-      // Default mode on first load
-      setMode(prefersDark ? "darkmode" : "defaultmode", prefersDark ? darkmode : defaultmode);
-
+  const savedMode = localStorage.getItem("mode");
+  if (savedMode) {
+    setMode(savedMode);
+  } else {
+    const prefersDark = window.matchMedia("(orefers-color-scheme: dark)").matches;
+    setMode(prefersDark ? "darkmode" : "defaultmode");
+  }
 
   defaultmode.addEventListener("click", () => setMode("defaultmode", defaultmode));
   lightmode.addEventListener("click", () => setMode("lightmode", lightmode));
   darkmode.addEventListener("click", () => setMode("darkmode", darkmode));
-
-  setMode("defaultmode", defaultmode);
 
 
 
@@ -175,24 +177,3 @@
     bodyMode.classList.toggle("left");
     bodyMode.classList.toggle("right");
   });
-
-
-
-// saves mode localy
-  const saved = localStorage.getItem("mode");
-  if (saved) {
-    setMode(saved, document.getElementById(saved));
-  } else {
-    const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
-    setMode(prefersDark ? "darkmode" : "defaultmode", prefersDark ? darkmode : defaultmode);
-  }
-
-  function setMode(mode, button) {
-    bodyMode.classList.remove("defaultmode", "lightmode", "darkmode");
-    bodyMode.classList.add(mode);
-
-    modeButtons.forEach(btn => btn.classList.remove("selected"));
-    button.classList.add("selected");
-
-    localStorage.setItem("mode", mode);
-  }
