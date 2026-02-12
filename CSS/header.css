@@ -4,7 +4,7 @@
     --logo-width: calc(var(--main-header-bar-height) * (800/536));      /* The width of the logo, can't be edited */
     --searchbar-height: calc(var(--main-header-bar-height) * 0.85);     /* Sets the height of searchbar. <= 1 */
     --menu-button-length: calc(var(--main-header-bar-height) * 0.7);        /* Sets the width and height of the hamburger menu. <= 1 */
-    --dropdown-menu-width: 40vw;        /* Sets the width of the dropdown menu. */
+    --dropdown-menu-width: 500px;        /* Sets the width of the dropdown menu. */
     --dropdown-element-width: calc(var(--dropdown-menu-width) * 0.8);       /* Sets the width of the elements in dropdown menu. <= 1 */
     --dropdown-menu-height: 55px;       /* Sets the height of each element in dropdown menu. <= 1 */
     --searchbar2-height: calc(var(--dropdown-menu-height) * 0.7);        /* Sets the height of searchbar2. <= 1 */
@@ -299,9 +299,9 @@ button {
         text-align: center;
 
         
-        -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
+        -webkit-overflow-scrolling: touch;
         overscroll-behavior: contain;
-        touch-action: pan-y;  */
+        touch-action: pan-y;
     }
 
     #dropdown-menu h1 {
@@ -424,6 +424,8 @@ button {
         gap: 20px;
         grid-area: buttons;
         padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
     }
 
     #buttons-menu div {
@@ -435,8 +437,10 @@ button {
     }
 
     #buttons-menu button {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
+        justify-items: center;
+        align-items: center;
     }
 
     #defaultmode,
@@ -448,8 +452,9 @@ button {
     }
 
     #buttons-menu img {
-        width: 25.2px;
-        height: 25.2px;
+        display: block;
+        width: 35px;
+        height: 35px;
         justify-self: center;
         align-self: center;
         transition: 0.3s;

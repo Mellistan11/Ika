@@ -1,20 +1,21 @@
 // makes main content unscrollable when mouse isnt hovering over it
 
-let scrollPosition = 0;
+  let scrollPosition = 0;
 
-function lockScroll() {
-  scrollPosition = window.scrollY;
-  document.body.classList.add("no-scroll");
-  document.body.style.top = `-${scrollPosition}px`;
-}
+  function lockScroll() {
+    scrollPosition = window.scrollY;
+    document.body.classList.add("no-scroll");
+    document.body.style.top = `-${scrollPosition}px`;
+  }
 
-function unlockScroll() {
-  document.body.classList.remove("no-scroll");
-  document.body.style.top = "";
-  window.scrollTo(0, scrollPosition);
-}
+  function unlockScroll() {
+    document.body.classList.remove("no-scroll");
+    document.body.style.top = "";
+    window.scrollTo(0, scrollPosition);
+  }
 
 
+  
 // Returns true if windowWidth <= 780px
 
   function isPhone() {
