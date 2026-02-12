@@ -30,6 +30,8 @@ body.defaultmode {
     --text-color-1: white;
     --text-color-2: black;
     --text-color-3: black;
+    --icon-brightness: 0;
+    --icon-brightness2: 1;
 
     transition: color 0.3s ease, background-color 0.3s ease, filter 0.3 ease;
 }
@@ -42,6 +44,8 @@ body.lightmode {
     --text-color-1: black;
     --text-color-2: white;
     --text-color-3: black;
+    --icon-brightness: invert(1);
+    --icon-brightness2: 0;
 
     transition: color 0.3s ease, background-color 0.3s ease, filter 0.3 ease;
 }
@@ -54,6 +58,8 @@ body.darkmode {
     --text-color-1: white;
     --text-color-2: white;
     --text-color-3: white;
+    --icon-brightness: invert(1);
+    --icon-brightness2: 1;
 
     transition: color 0.3s ease, background-color 0.3s ease, filter 0.3 ease;
 }
@@ -166,6 +172,7 @@ button {
         width: 90%;
         padding: 5%;
         transition:  0.3s ease-in-out;
+        filter: brightness(var(--icon-brightness2))  
     }
 
     #searchbar-input {
@@ -311,7 +318,8 @@ button {
     .basket-icon {
         height: 100%;
         width: 100%;
-        transition: 0.3s ease-in-out;        
+        transition: 0.3s ease-in-out;      
+        filter: brightness(var(--icon-brightness2))  
     }
 
 
@@ -436,6 +444,7 @@ button {
         width: 90%;
         padding: 5%;
         transition:  0.3s ease-in-out;
+        filter: brightness(var(--icon-brightness2))  
     }
     #searchbar-input2 {
         position: relative;
@@ -495,7 +504,7 @@ button {
     #move-dropdown img,
     #zoom-in img,
     #zoom-out img {
-        filter: brightness(var(--brightness-images));
+        filter:var(--icon-brightness);
     }
 
     #buttons-menu img {
