@@ -144,7 +144,8 @@
   function setMode(mode) {
     bodyMode.classList.remove("defaultmode");
     bodyMode.classList.remove("lightmode");
-      bodyMode.classList.remove("darkmode");
+    bodyMode.classList.remove("darkmode");
+
     bodyMode.classList.add(mode);
     currentMode = mode;
   }
@@ -155,3 +156,13 @@
   defaultmode.addEventListener("click", () => setMode("defaultmode"));
   lightmode.addEventListener("click", () => setMode("lightmode"));
   darkmode.addEventListener("click", () => setMode("darkmode"));
+
+
+
+// Locate dropdown meny to left or right
+  const moveDropdown = document.getElementById("move-dropdown");
+
+  moveDropdown.addEventListener("click", () => {
+    bodyMode.classList.toggle("left");
+    bodyMode.classList.toggle("right");
+  });

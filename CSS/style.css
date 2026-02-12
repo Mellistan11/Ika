@@ -64,6 +64,14 @@ body.darkmode {
     transition: color 0.3s ease, background-color 0.3s ease, filter 0.3 ease;
 }
 
+body.left {
+    --dropdown-position: left;
+}
+
+body.right {
+    --dropdown-position: right;
+}
+
 
 
 main {
@@ -354,7 +362,6 @@ button {
         position: fixed;
         box-sizing: border-box;
         top: var(--header-height);
-        right: 0;
         height: calc(100dvh - var(--header-height));
         padding: 0 30px;
         padding-top: 25px;
@@ -370,11 +377,19 @@ button {
         touch-action: pan-y;
     }
 
+    body.left #dropdown-menu {
+        left: 0;
+    }
+
+    body.right #dropdown-menu {
+        right: 0;
+    }
+
     #dropdown-menu h1 {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: 28px;
         height: 40px;
-        justify-self: right;
+        justify-self: var(--dropdown-position);
         margin: 15px 0;
         grid-area: kategorier;
         color: var(--text-color-2);
@@ -406,7 +421,7 @@ button {
     #dropdown-nav-container {
         display: grid;
         gap: 20px;
-        justify-items: end;
+        justify-items: var(--dropdown-position);
         grid-area: navContainer;
     }
 
@@ -517,6 +532,10 @@ button {
         transition: transform 0.3s;
     }
 
+    body.left #move-dropdown img{
+        transform: rotate(180deg);
+    }
+
 
 
 /* Dropdown Shadow */
@@ -529,10 +548,19 @@ button {
         height: calc(100vh - var(--header-height));
         width: 100vw;
         opacity: 0;
+    }
 
+    body.left #dropdown-shadow {
         background: linear-gradient( to right,
         rgba(0, 0, 0, 0.067) 0%,
-        var(--background-color-1) calc(100vw - var(--dropdown-menu-width)),
+        var(--background-color-1) var(--dropdown-menu-width),
+        rgba(0, 0, 0, 0.067) 100%
+        );
+    }
+     body.right #dropdown-shadow {
+        background: linear-gradient( to left,
+        rgba(0, 0, 0, 0.067) 0%,
+        var(--background-color-1) var(--dropdown-menu-width),
         rgba(0, 0, 0, 0.067) 100%
         );
     }
