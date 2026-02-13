@@ -26,55 +26,82 @@
 
 // Menu open / close
 
-  const menuButton = document.getElementById("menu-button");
-  const dropdownShadowButton = document.getElementById("dropdown-shadow");
-  const dropdownMenu = document.getElementById("dropdown-menu");
-  const dropdownGradient = document.getElementById("dropdown-gradient");
-  const dropdownShadow = document.getElementById("dropdown-shadow");
-  let menuOpen = false;
+const menuButton = document.getElementById("menu-button");
+const dropdownShadowButton = document.getElementById("dropdown-shadow");
+const dropdownMenu = document.getElementById("dropdown-menu");
+const dropdownGradient = document.getElementById("dropdown-gradient");
+const dropdownShadow = document.getElementById("dropdown-shadow");
 
-  function openMenu() {
+let menuOpen = false;
+
+if (!history.state) {
+  history.replaceState({ menuOpen: false }, "");
+}
+
+function applyMenuState(open) {
+  if (open) {
     menuButton.classList.add("menu-button-open");
-    dropdownMenu.classList.toggle("dropdown-menu-hidden");
-    dropdownMenu.classList.toggle("dropdown-menu-shown");
 
-    dropdownGradient.classList.toggle("dropdown-gradient-open");
+    dropdownMenu.classList.remove("dropdown-menu-hidden");
+    dropdownMenu.classList.add("dropdown-menu-shown");
 
-    dropdownShadow.classList.toggle("dropdown-menu-hidden");
-    dropdownShadow.classList.toggle("dropdown-menu-shown");
+    dropdownGradient.classList.add("dropdown-gradient-open");
+
+    dropdownShadow.classList.remove("dropdown-menu-hidden");
+    dropdownShadow.classList.add("dropdown-menu-shown");
 
     lockScroll();
     menuOpen = true;
-  }
-
-  function closeMenu() {
+  } else {
     menuButton.classList.remove("menu-button-open");
-    dropdownMenu.classList.toggle("dropdown-menu-shown");
-    dropdownMenu.classList.toggle("dropdown-menu-hidden");
 
-    dropdownGradient.classList.toggle("dropdown-gradient-open");
+    dropdownMenu.classList.remove("dropdown-menu-shown");
+    dropdownMenu.classList.add("dropdown-menu-hidden");
 
-    dropdownShadow.classList.toggle("dropdown-menu-shown");
-    dropdownShadow.classList.toggle("dropdown-menu-hidden");
+    dropdownGradient.classList.remove("dropdown-gradient-open");
+
+    dropdownShadow.classList.remove("dropdown-menu-shown");
+    dropdownShadow.classList.add("dropdown-menu-hidden");
 
     unlockScroll();
     menuOpen = false;
   }
-  
+}
 
-  menuButton.addEventListener("click", () => {
-    if (!menuOpen) {
-      openMenu();
-    } else {
-      closeMenu();
-    }
-  });
+function openMenu(pushHistory = true) {
+  if (menuOpen) return;
 
-  dropdownShadowButton.addEventListener("click", () => {
-    if (menuOpen) {
-      closeMenu();
-    }
-  });
+  applyMenuState(true);
+
+  if (pushHistory) {
+    history.pushState({ menuOpen: true }, "");
+  }
+}
+
+function closeMenu(viaPopstate = false) {
+  if (!menuOpen) return;
+
+  applyMenuState(false);
+
+  if (!viaPopstate && history.state && history.state.menuOpen) {
+    history.back();
+  }
+}
+
+menuButton.addEventListener("click", () => {
+  if (!menuOpen) openMenu(true);
+  else closeMenu(false);
+});
+
+dropdownShadowButton.addEventListener("click", () => {
+  if (menuOpen) closeMenu(false);
+});
+
+window.addEventListener("popstate", (event) => {
+  const shouldOpen = !!(event.state && event.state.menuOpen);
+  applyMenuState(shouldOpen);
+});
+
 
 
 
@@ -92,6 +119,7 @@
     searchbar.classList.add("searchbar-retracted"); 
   })
 
+  
 
 // Basket open / close
   const container = document.getElementById("container"); 
@@ -101,6 +129,7 @@
     container.classList.toggle("basket-open");
     container.classList.toggle("basket-closed");
   })
+
 
 
 // Zoom in / Zoom out
@@ -160,7 +189,7 @@
   if (savedMode) {
     setMode(savedMode);
   } else {
-    const prefersDark = window.matchMedia("(orefers-color-scheme: dark)").matches;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     setMode(prefersDark ? "darkmode" : "defaultmode");
   }
 
@@ -173,7 +202,21 @@
 // Locate dropdown meny to left or right
   const moveDropdown = document.getElementById("move-dropdown");
 
+  const savedSide = localStorage.getItem("dropdownPosition");
+
+  if (savedSide) {
+    bodyMode.classList.remove("left");
+    bodyMode.classList.remove("right");
+    bodyMode.classList.add(savedSide);
+  }
+  
   moveDropdown.addEventListener("click", () => {
     bodyMode.classList.toggle("left");
     bodyMode.classList.toggle("right");
+
+    if (bodyMode.classList.contains("left")) {
+      localStorage.setItem("dropdownPosition", "left")
+    } else {
+      localStorage.setItem("dropdownPosition", "right")
+    }
   });
