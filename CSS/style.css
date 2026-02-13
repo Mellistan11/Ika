@@ -80,6 +80,13 @@ main {
     margin-left: clamp(15px, 20vw, 100px);
     margin-right: clamp(15px, 20vw, 100px);
     color: var(--text-color-3);
+    justify-content: center;
+}
+
+main img {
+    justify-self: center;
+    width: 500px;
+    height: 500px;
 }
 
 
