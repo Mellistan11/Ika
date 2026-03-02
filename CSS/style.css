@@ -379,7 +379,7 @@ button {
         overflow-y: auto;
         text-align: center;
 
-        
+        /* fix mobile scrolling problem */
         -webkit-overflow-scrolling: touch;
         overscroll-behavior: contain;
         touch-action: pan-y;
