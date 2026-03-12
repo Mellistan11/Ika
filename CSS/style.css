@@ -15,6 +15,7 @@ body {
     background-color: var(--background-color-2);
     margin: 0;
     padding: 0;
+    height: 100vh;
 }
 
 body.no-scroll {
@@ -81,12 +82,6 @@ main {
     margin-right: clamp(15px, 20vw, 100px);
     color: var(--text-color-3);
     justify-content: center;
-}
-
-main img {
-    justify-self: center;
-    width: 40vw;
-    height: 40vw;
 }
 
 
@@ -302,8 +297,9 @@ button {
     }
 
     #basket { 
-        justify-self: left;
-        transform: translateX(25%);
+        display: flex;
+        justify-self: center;
+        align-self: center;
     }
 
     .basket-open  #basket {
@@ -571,6 +567,7 @@ button {
         height: calc(100vh - var(--header-height));
         width: 100vw;
         opacity: 0;
+        visibility: hidden;
     }
 
     body.left #dropdown-shadow {
@@ -580,7 +577,7 @@ button {
         rgba(0, 0, 0, 0.067) 100%
         );
     }
-     body.right #dropdown-shadow {
+    body.right #dropdown-shadow {
         background: linear-gradient( to left,
         rgba(0, 0, 0, 0.067) 0%,
         var(--background-color-1) var(--dropdown-menu-width),
@@ -589,12 +586,14 @@ button {
     }
 
     #dropdown-shadow.dropdown-menu-shown {
-        transition: opacity 0.5s ease-in-out;
+        transition: opacity  0.5s ease-in-out;
         opacity: 1;
+        visibility: visible;
     }
     #dropdown-shadow.dropdown-menu-hidden {
-        transition: opacity 0.25s ease-in-out;
+        transition: opacity  0.25s ease-in-out;
         opacity: 0;
+        visibility: hidden;
     }
 
 
