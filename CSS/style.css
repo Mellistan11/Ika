@@ -215,10 +215,19 @@ transform: translateX(calc(var(--main-header-bar-height) * 0.9)) rotate(-45deg);
     grid-template-columns: calc(var(--main-header-bar-height) * 0.7) 1fr ;
 }
 
+.basket-open .basket-icon {
+    content: url("../images/icons/Basket\ close\ icon.webp");
+}
+
+.basket-closed .basket-icon {
+    content: url("../images/icons/Basket\ Icon.webp");
+}
+
+
 .basket-closed  #basket-container {
     grid-template-columns: 1fr ;
 }
-
+    
 #basket { 
     display: flex;
     justify-self: center;

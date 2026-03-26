@@ -42,8 +42,8 @@ function applyMenuState(open) {
   if (open) {
     menuButton.classList.add("menu-button-open");
 
-    dropdownMenu.classList.remove("dropdown-menu-hidden");
-    dropdownMenu.classList.add("dropdown-menu-shown");
+    
+    
 
     dropdownGradient.classList.add("dropdown-gradient-open");
 
